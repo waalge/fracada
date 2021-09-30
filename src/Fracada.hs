@@ -194,9 +194,6 @@ fractionNFT ToFraction {nftAsset, fractions, fractionTokenName} = do
   -- pay minted tokens back to signer
     pkh    <- pubKeyHash <$> Contract.ownPubKey
     utxos  <- utxosAt $ fractionNftValidatorAddress nftAsset
-    Contract.logInfo @String $ printf "SKIPPED :: \n\n {%s}" (show utxos)
-
-    {-
     let
       -- declare the NFT value
       nftValue = assetClassValue nftAsset 1
@@ -231,7 +228,6 @@ fractionNFT ToFraction {nftAsset, fractions, fractionTokenName} = do
     ledgerTx <- submitTxConstraintsWith @Void lookups tx
     void $ awaitTxConfirmed $ txId ledgerTx
     Contract.logInfo @String $ printf "minted %s" (show fractions)
-    -}
 
 
 returnNFT :: AssetClass -> Contract w FracNFTSchema Text ()
