@@ -25,6 +25,7 @@ library
                      , plutus-tx-plugin
                      , text
                      , playground-common
+
   default-language:   Haskell2010
   default-extensions: DataKinds
                       DeriveAnyClass
@@ -56,7 +57,7 @@ executable           Emulator
   build-depends:     base
                     , aeson
                     , cardano-api
-                    , cardano-ledger-alonzo
+                    -- , cardano-ledger-alonzo
                     , bytestring
                     , containers
                     , freer-extras
