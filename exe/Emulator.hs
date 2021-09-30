@@ -3,25 +3,25 @@
 {-# LANGUAGE DeriveGeneric       #-}
 {-# LANGUAGE FlexibleContexts    #-}
 {-# LANGUAGE NoImplicitPrelude   #-}
+{-# LANGUAGE NumericUnderscores  #-}
 {-# LANGUAGE OverloadedStrings   #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TemplateHaskell     #-}
 {-# LANGUAGE TypeApplications    #-}
 {-# LANGUAGE TypeFamilies        #-}
 {-# LANGUAGE TypeOperators       #-}
-{-# LANGUAGE NumericUnderscores    #-}
 
-import           Prelude                (IO, show, Show (..))
+import           Prelude                    (IO, Show (..), show)
 -- import           Control.Monad          hiding (fmap)
-import           PlutusTx.Prelude       hiding (Semigroup(..), unless)
-import           Ledger.Value           as Value
-import           Plutus.Trace.Emulator  as Emulator
+import           Ledger.Value               as Value
+import           Plutus.Trace.Emulator      as Emulator
+import           PlutusTx.Prelude           hiding (Semigroup (..), unless)
 import           Wallet.Emulator.Wallet
 -- import           Control.Monad.Freer.Extras as Extras
 import           Fracada
 -- import           Plutus.Contract        as Contract
-import           Ledger.Ada             as Ada
 import qualified Data.Map                   as Map
+import           Ledger.Ada                 as Ada
 -- import           Control.Lens
 import           Control.Monad              hiding (fmap)
 import           Control.Monad.Freer.Extras as Extras
@@ -58,7 +58,7 @@ scenario1 :: EmulatorTrace ()
 scenario1 = do
     h1 <- activateContractWallet (knownWallet 1) endpoints
     void $ Emulator.waitNSlots 1
-    let 
+    let
         toFraction = ToFraction
             { nftAsset = nft
             , fractions = 10

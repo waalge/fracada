@@ -12,37 +12,40 @@
 
 module Fracada where
 
-import           Prelude                (IO, String, show, Show)
 import           Control.Monad          hiding (fmap)
+import           Prelude                (IO, Show, String, show)
 -- import           Control.Lens           (preview)
+import           Data.Aeson             (FromJSON, ToJSON)
 import qualified Data.Map               as Map
+import           Data.Maybe             (fromJust)
 import           Data.Text              (Text)
 import           Data.Void              (Void)
-import           Data.Maybe             (fromJust)
-import           Plutus.Contract        as Contract
-import qualified PlutusTx
-import           PlutusTx.IsData
-import           PlutusTx.Prelude       hiding (Semigroup(..), unless)
+import           GHC.Generics           (Generic)
 import           Ledger                 hiding (singleton)
 import           Ledger.Constraints     as Constraints
+import qualified Ledger.Contexts        as Validation
 import qualified Ledger.Typed.Scripts   as Scripts
-import qualified Ledger.Contexts                   as Validation
 import           Ledger.Value           as Value
-import           Playground.Contract    (printJson, printSchemas, ensureKnownCurrencies, stage, ToSchema, NonEmpty(..) )
-import           Playground.TH          (mkKnownCurrencies, mkSchemaDefinitions, ensureKnownCurrencies)
+import           Playground.Contract    (NonEmpty (..), ToSchema,
+                                         ensureKnownCurrencies, printJson,
+                                         printSchemas, stage)
+import           Playground.TH          (ensureKnownCurrencies,
+                                         mkKnownCurrencies, mkSchemaDefinitions)
 import           Playground.Types       (KnownCurrency (..))
+import           Plutus.Contract        as Contract
 import           Plutus.Trace.Emulator  as Emulator
+import qualified PlutusTx
+import           PlutusTx.IsData
+import           PlutusTx.Prelude       hiding (Semigroup (..), unless)
 import           Prelude                (Semigroup (..))
 import           Text.Printf            (printf)
-import           GHC.Generics         (Generic)
-import           Data.Aeson           (ToJSON, FromJSON)
 import           Wallet.Emulator.Wallet
 
 
 data FractionNFTDatum = FractionNFTDatum {
-      tokensClass     :: AssetClass,
-      totalFractions  :: Integer,
-      owner           :: PubKeyHash
+      tokensClass    :: AssetClass,
+      totalFractions :: Integer,
+      owner          :: PubKeyHash
     } deriving (Generic, Show)
 
 PlutusTx.makeLift ''FractionNFTDatum
@@ -155,9 +158,9 @@ curSymbol ::  AssetClass -> Integer -> TokenName -> CurrencySymbol
 curSymbol asset numberOfFractions fractionTokenName = scriptCurrencySymbol $ mintFractionTokensPolicy asset numberOfFractions fractionTokenName
 
 data ToFraction = ToFraction
-    { nftAsset :: !AssetClass
-    , fractions   :: !Integer
-    , fractionTokenName    :: !TokenName
+    { nftAsset          :: !AssetClass
+    , fractions         :: !Integer
+    , fractionTokenName :: !TokenName
     } deriving (Generic, ToJSON, FromJSON, ToSchema)
 
 type FracNFTSchema =
@@ -170,7 +173,7 @@ extractData :: (PlutusTx.FromData a) => ChainIndexTxOut -> Maybe a
 extractData ci = do
   case ci of
     ScriptChainIndexTxOut _addr _validator (Right datum) _value -> datumToData datum
-    _ -> Nothing 
+    _ -> Nothing
 
 lockNFT :: AssetClass -> Contract w FracNFTSchema Text ()
 lockNFT nftAsset = do
