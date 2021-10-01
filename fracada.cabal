@@ -8,45 +8,51 @@ Copyright:           © 2021 dcSpark
 License:             NONE
 License-files:       LICENSE
 
+common common-extensions
+  default-extensions: 
+    , DataKinds
+    , DeriveAnyClass
+    , DeriveGeneric
+    , DerivingStrategies
+    , ExplicitForAll
+    , FunctionalDependencies
+    , GADTs
+    , MultiParamTypeClasses
+    , NamedFieldPuns
+    , OverloadedStrings
+    , PolyKinds
+    , KindSignatures
+    , StandaloneDeriving
+    , TemplateHaskell
+    , TypeApplications
+    , TypeFamilies
+    , TypeOperators
+    , MultiParamTypeClasses
+    , ScopedTypeVariables
+    , StandaloneKindSignatures
+  
 
 library
   hs-source-dirs:      src
   exposed-modules:     Fracada
-  build-depends:       aeson
-                     , base ^>=4.14.1.0
-                     , bytestring
-                     , containers
-                     , freer-extras
-                     , plutus-core
-                     , plutus-contract
-                     , plutus-ledger
-                     , plutus-ledger-api
-                     , plutus-tx
-                     , plutus-tx-plugin
-                     , text
-                     , playground-common
+  build-depends:       
+    , aeson
+    , base ^>=4.14.1.0
+    , bytestring
+    , containers
+    , freer-extras
+    , plutus-core
+    , plutus-contract
+    , plutus-ledger
+    , plutus-ledger-api
+    , plutus-tx
+    , plutus-tx-plugin
+    , text
+    , playground-common
+
+  -- import: common-extensions 
 
   default-language:   Haskell2010
-  default-extensions: DataKinds
-                      DeriveAnyClass
-                      DeriveGeneric
-                      DerivingStrategies
-                      ExplicitForAll
-                      FunctionalDependencies
-                      GADTs
-                      MultiParamTypeClasses
-                      NamedFieldPuns
-                      OverloadedStrings
-                      PolyKinds
-                      KindSignatures
-                      StandaloneDeriving
-                      TemplateHaskell
-                      TypeApplications
-                      TypeFamilies
-                      TypeOperators
-                      MultiParamTypeClasses
-                      ScopedTypeVariables
-                      StandaloneKindSignatures
   ghc-options:        -Wall -fobject-code -fno-ignore-interface-pragmas -fno-omit-interface-pragmas -fno-strictness -fno-spec-constr -fno-specialise
 
 
@@ -54,43 +60,24 @@ executable           Emulator
   main-is:           Emulator.hs
   hs-source-dirs:    exe, src
   other-modules:     Fracada
-  build-depends:     base
-                    , aeson
-                    , cardano-api
-                    -- , cardano-ledger-alonzo
-                    , bytestring
-                    , containers
-                    , freer-extras
-                    , plutus-core
-                    , plutus-contract
-                    , plutus-ledger
-                    , plutus-ledger-api
-                    , plutus-tx
-                    , plutus-tx-plugin
-                    , text
-                    , playground-common
-                    , lens
-                    , data-default
-                    , tasty
+  build-depends:     
+    , base
+    , aeson
+    , cardano-api
+    , bytestring
+    , containers
+    , freer-extras
+    , plutus-core
+    , plutus-contract
+    , plutus-ledger
+    , plutus-ledger-api
+    , plutus-tx
+    , plutus-tx-plugin
+    , text
+    , playground-common
+    , lens
+    , data-default
+    , tasty
   default-language:   Haskell2010
-  default-extensions: DataKinds
-                      DeriveAnyClass
-                      DeriveGeneric
-                      DerivingStrategies
-                      ExplicitForAll
-                      FunctionalDependencies
-                      GADTs
-                      MultiParamTypeClasses
-                      NamedFieldPuns
-                      OverloadedStrings
-                      PolyKinds
-                      KindSignatures
-                      StandaloneDeriving
-                      TemplateHaskell
-                      TypeApplications
-                      TypeFamilies
-                      TypeOperators
-                      MultiParamTypeClasses
-                      ScopedTypeVariables
-                      StandaloneKindSignatures
+  import: common-extensions
   ghc-options:        -Wall -fobject-code -fno-ignore-interface-pragmas -fno-omit-interface-pragmas -fno-strictness -fno-spec-constr -fno-specialise

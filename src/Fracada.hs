@@ -8,13 +8,15 @@
 {-# LANGUAGE TemplateHaskell     #-}
 {-# LANGUAGE TypeApplications    #-}
 {-# LANGUAGE TypeFamilies        #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE TypeOperators       #-}
+
 
 module Fracada where
 
 import           Control.Monad          hiding (fmap)
 import           Prelude                (IO, Show, String, show)
--- import           Control.Lens           (preview)
 import           Data.Aeson             (FromJSON, ToJSON)
 import qualified Data.Map               as Map
 import           Data.Maybe             (fromJust)
@@ -256,7 +258,6 @@ returnNFT nftAsset = do
       validator = fractionValidatorScript nftAsset
       lookups = Constraints.mintingPolicy (mintFractionTokensPolicy nftAsset totalFractions fractionTokenName)  <>
                 Constraints.otherScript validator <>
-                -- Constraints.unspentOutputs utxos'
                 Constraints.unspentOutputs utxos'
 
       tx      = Constraints.mustMintValue tokensToBurn <>
