@@ -12,29 +12,17 @@
 {-# LANGUAGE TypeOperators       #-}
 
 import           Prelude                    (IO, Show (..), show)
--- import           Control.Monad          hiding (fmap)
 import           Ledger.Value               as Value
 import           Plutus.Trace.Emulator      as Emulator
 import           PlutusTx.Prelude           hiding (Semigroup (..), unless)
 import           Wallet.Emulator.Wallet
--- import           Control.Monad.Freer.Extras as Extras
 import           Fracada
--- import           Plutus.Contract        as Contract
 import qualified Data.Map                   as Map
 import           Ledger.Ada                 as Ada
--- import           Control.Lens
 import           Control.Monad              hiding (fmap)
 import           Control.Monad.Freer.Extras as Extras
 import           Data.Default               (Default (..))
--- import qualified Data.Map                   as Map
--- import           Data.Monoid                (Last (..))
--- import           Ledger
--- import           Ledger.Value
--- import           Ledger.Ada                 as Ada
--- import           Plutus.Contract.Test
--- import           Plutus.Trace.Emulator      as Emulator
 import           PlutusTx.Prelude
--- import           Test.Tasty
 
 nftCurrency :: CurrencySymbol
 nftCurrency = "66"
@@ -48,7 +36,7 @@ nft = AssetClass (nftCurrency, nftName)
 
 main :: IO ()
 main = do
-    -- runEmulatorTraceIO' def emCfg scenario1
+    runEmulatorTraceIO' def emCfg scenario1
     runEmulatorTraceIO' def emCfg scenario2
 
 emCfg :: EmulatorConfig
