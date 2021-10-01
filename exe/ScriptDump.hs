@@ -1,6 +1,6 @@
-{-# LANGUAGE OverloadedStrings   #-}
+{-# LANGUAGE OverloadedStrings #-}
 
-import           Prelude as Haskell
+import           Prelude                    as Haskell
 import           System.Environment
 
 import           Cardano.Api
@@ -8,16 +8,16 @@ import           Cardano.Api.Shelley
 import           Codec.Serialise
 
 import qualified Cardano.Ledger.Alonzo.Data as Alonzo
-import qualified Plutus.V1.Ledger.Api as Plutus
+import qualified Plutus.V1.Ledger.Api       as Plutus
 
-import qualified Data.ByteString.Char8 as BS
-import qualified Data.ByteString.Short as SBS
-import qualified Data.ByteString.Lazy as LB
+import qualified Data.ByteString.Char8      as BS
+import qualified Data.ByteString.Lazy       as LB
+import qualified Data.ByteString.Short      as SBS
 
-import          Fracada
+import           Fracada
 
-import          Plutus.V1.Ledger.Value
-import qualified PlutusTx.Builtins.Class  as Tx.Builtins
+import           Plutus.V1.Ledger.Value
+import           PlutusTx.Builtins.Class    (stringToBuiltinByteString)
 
 
 main :: IO ()
@@ -28,15 +28,15 @@ main = do
     do
       putStrLn $ "Usage:"
       putStrLn $ "script-dump <NFT currency symbol> <NFT token name> <Fraction token name> <number of fractions>"
-  else 
-    do 
-      let       
-        nftCurrencySymbol = Tx.Builtins.stringToBuiltinByteString $ args!!0
-        nftTokenName = Tx.Builtins.stringToBuiltinByteString $ args!!1 
-        fractionTokenName = Tx.Builtins.stringToBuiltinByteString $ args!!2
+  else
+    do
+      let
+        nftCurrencySymbol = stringToBuiltinByteString $ args!!0
+        nftTokenName = stringToBuiltinByteString $ args!!1
+        fractionTokenName = stringToBuiltinByteString $ args!!2
         numberOfFractions = (read $ args!!3 )
 
-        scriptnum = 42 -- Huh?! 
+        scriptnum = 42 -- Huh?!
         nft = AssetClass (CurrencySymbol ( nftCurrencySymbol), TokenName nftTokenName)
         fractionToken = Plutus.TokenName fractionTokenName
         appliedValidatorScript =fractionValidatorScript nft
