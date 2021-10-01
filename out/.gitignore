@@ -1,0 +1,4 @@
+# dir for generated files 
+# want the directory to exist in the git repo but no files to be tracked
+*
+!.gitignore* 

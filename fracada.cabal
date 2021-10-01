@@ -8,6 +8,13 @@ copyright:     2021 dcSpark
 license:
 license-files: LICENSE
 
+common common-ghc-options
+  ghc-options:
+    -Wall -fobject-code -fno-ignore-interface-pragmas
+    -fno-omit-interface-pragmas -fno-strictness -fno-spec-constr
+    -fno-specialise
+    
+
 library
   hs-source-dirs:   src
   exposed-modules:  Fracada
@@ -27,12 +34,9 @@ library
     , text
 
   default-language: Haskell2010
-  ghc-options:
-    -Wall -fobject-code -fno-ignore-interface-pragmas
-    -fno-omit-interface-pragmas -fno-strictness -fno-spec-constr
-    -fno-specialise
+  import: common-ghc-options 
 
-executable Emulator
+executable          test
   main-is:          Emulator.hs
   hs-source-dirs:   exe src
   other-modules:    Fracada
@@ -60,3 +64,25 @@ executable Emulator
     -Wall -fobject-code -fno-ignore-interface-pragmas
     -fno-omit-interface-pragmas -fno-strictness -fno-spec-constr
     -fno-specialise
+
+executable           script-dump
+  main-is:           ScriptDump.hs
+  hs-source-dirs:    exe, src
+  other-modules:     Fracada
+  build-depends:     base
+                    , aeson
+                    , cardano-api
+                    , cardano-ledger-alonzo
+                    , bytestring
+                    , containers
+                    , freer-extras
+                    , plutus-core
+                    , plutus-contract
+                    , plutus-ledger
+                    , plutus-ledger-api
+                    , plutus-tx
+                    , plutus-tx-plugin
+                    , text
+                    , serialise
+                    , playground-common
+  default-language:   Haskell2010
