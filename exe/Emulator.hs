@@ -11,18 +11,18 @@
 {-# LANGUAGE TypeFamilies        #-}
 {-# LANGUAGE TypeOperators       #-}
 
-import           Prelude                    (IO, Show (..), show)
-import           Ledger.Value               as Value
-import           Plutus.Trace.Emulator      as Emulator
-import           PlutusTx.Prelude           hiding (Semigroup (..), unless)
-import           Wallet.Emulator.Wallet
-import           Fracada
-import qualified Data.Map                   as Map
-import           Ledger.Ada                 as Ada
 import           Control.Monad              hiding (fmap)
 import           Control.Monad.Freer.Extras as Extras
 import           Data.Default               (Default (..))
+import qualified Data.Map                   as Map
+import           Fracada
+import           Ledger.Ada                 as Ada
+import           Ledger.Value               as Value
+import           Plutus.Trace.Emulator      as Emulator
 import           PlutusTx.Prelude
+import           PlutusTx.Prelude           hiding (Semigroup (..), unless)
+import           Prelude                    (IO, Show (..), show)
+import           Wallet.Emulator.Wallet
 
 nftCurrency :: CurrencySymbol
 nftCurrency = "66"

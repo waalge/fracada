@@ -1,22 +1,21 @@
-{-# LANGUAGE DataKinds           #-}
-{-# LANGUAGE DeriveAnyClass      #-}
-{-# LANGUAGE DeriveGeneric       #-}
-{-# LANGUAGE FlexibleContexts    #-}
-{-# LANGUAGE NoImplicitPrelude   #-}
-{-# LANGUAGE OverloadedStrings   #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TemplateHaskell     #-}
-{-# LANGUAGE TypeApplications    #-}
-{-# LANGUAGE TypeFamilies        #-}
+{-# LANGUAGE DataKinds             #-}
+{-# LANGUAGE DeriveAnyClass        #-}
+{-# LANGUAGE DeriveGeneric         #-}
+{-# LANGUAGE FlexibleContexts      #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE TypeOperators       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE ScopedTypeVariables   #-}
+{-# LANGUAGE TemplateHaskell       #-}
+{-# LANGUAGE TypeApplications      #-}
+{-# LANGUAGE TypeFamilies          #-}
+{-# LANGUAGE TypeOperators         #-}
 
 
 module Fracada where
 
 import           Control.Monad          hiding (fmap)
-import           Prelude                (IO, Show, String, show)
 import           Data.Aeson             (FromJSON, ToJSON)
 import qualified Data.Map               as Map
 import           Data.Maybe             (fromJust)
@@ -39,7 +38,7 @@ import           Plutus.Trace.Emulator  as Emulator
 import qualified PlutusTx
 import           PlutusTx.IsData
 import           PlutusTx.Prelude       hiding (Semigroup (..), unless)
-import           Prelude                (Semigroup (..))
+import           Prelude                (IO, Semigroup (..), Show, String, show)
 import           Text.Printf            (printf)
 import           Wallet.Emulator.Wallet
 
